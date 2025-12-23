@@ -1,0 +1,101 @@
+# 🔐 Secure File Decryption Guide
+
+This repository contains encrypted files and encryption/decryption code.
+The original files can be decrypted only if you have the correct private key
+and the password used to protect it.
+
+---
+
+## 🧠 How the Security Model Works
+
+This project uses modern cryptography:
+
+- AES-256-GCM for file encryption (confidentiality + integrity)
+- RSA-4096 public key encryption for the AES key
+- The private key is encrypted with a password
+
+To decrypt a file, you must have BOTH:
+1. The private key file
+2. The password
+
+The password alone is not sufficient.
+The private key alone is not sufficient.
+
+---
+
+## 📦 What Is Stored in This Repository
+
+Safe to store on GitHub:
+
+- Encrypted files (e.g. CryptoSeedPhrase.txt.enc)
+- Public key (public.key)
+- Source code
+- This README
+
+---
+
+## 🚫 What Is NOT Stored in This Repository
+
+For security reasons, the following are never committed:
+
+- private.key
+- password
+- decrypted files
+
+These must be obtained securely, stored locally and do not alter private key, public key, and encrypted file in any case.
+
+---
+
+## 🔑 What You Need to Decrypt a File
+
+Before decrypting, make sure you have:
+
+1. Encrypted file (CryptoSeedPhrase.txt.enc)
+2. Private key file (private.key)
+3. The password used to protect the private key
+
+---
+
+## 📁 Where to Store the Private Key
+
+Store the private key outside the Git repository.
+
+---
+
+## ▶ How to Decrypt a File
+
+1. Compile the project:
+javac -d out src/**/*.java
+
+2. Run the program:
+java -cp out Main
+
+3. Output:
+CryptoSeedPhrase_decrypted.txt
+
+If the password or private key is incorrect, decryption will fail safely.
+
+---
+
+## 🚨 Common Errors
+
+Authentication tag mismatch:
+- Wrong password
+- Wrong private key
+- File was modified
+
+BadPaddingException:
+- File tampered or incorrect key
+
+InvalidKeySpecException:
+- Corrupted private key file
+
+File not found:
+- Incorrect private key path
+
+## 🆘 Help
+
+If decryption fails:
+1. Verify the private key file
+2. Verify the password
+3. Ensure the encrypted file was not modified
